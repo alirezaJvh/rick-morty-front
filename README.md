@@ -111,7 +111,7 @@ The below are only an example. Feel free to follow it or to come up with your ow
 
 ## Tips & Tricks
 
-- If it's taking you more than 3-4 hours to complete this challenge, you're probably overcomplicating something. Keep it simple, clean and smart.
+- If it's taking you more than 4-5 hours to complete this challenge, check if you're not overcomplicating something. Try to keep it simple, clean and smart.
 
 - Feel free to choose which DBMS to use (SQLite, a text file, MySQL, PostgreSQL, MongoDB, CouchDB...), just keep it simple to setup and initialize, and add instructions on how to do it to the README file.
 
