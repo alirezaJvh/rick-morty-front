@@ -90,14 +90,18 @@ The requirements for this project are found below. Please read them carefully. W
 
 The below are only an example. Feel free to follow it or to come up with your own.
 
+### Bonus - Code quality
+
+- If you have *zeit und lust* you can setup a linter to ensure your code style stays consistent throughout the entire application
+
+
 ![login screen](./logged-out.png)
 ![example of page with all cards visible](./logged-in-no-filter.png)
 ![example of page with filter activated](./logged-in-with-filter.png)
 ## Requirements
 
 - You must use **React**. This is the main library in our frontend currently.
-- You must use **GraphQL**. This is the main way our frontend retrieves data currently.
-- You must setup a **Linter** in your code.
+- You must use **GraphQL**. This is the main way our frontend retrieves data currently..
 - Do **NOT** use any CSS framework (Bootstrap, Tailwind etc) or any Reaact UI Library (Material-ui, Kendo-ui etc) since those make it difficult for you to demonstrate your CSS skills.
 
 ## How to Deliver
