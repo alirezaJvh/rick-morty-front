@@ -102,7 +102,7 @@ The below are only an example. Feel free to follow it or to come up with your ow
 
 - You must use **React**. This is the main library in our frontend currently.
 - You must use **GraphQL**. This is the main way our frontend retrieves data currently..
-- Do **NOT** use any CSS framework (Bootstrap, Tailwind etc) or any Reaact UI Library (Material-ui, Kendo-ui etc) since those make it difficult for you to demonstrate your CSS skills.
+- Do **NOT** use any CSS framework (Bootstrap, Tailwind etc) or any React UI Library (Material-ui, Kendo-ui etc) since those make it difficult for you to demonstrate your CSS skills.
 
 ## How to Deliver
 
