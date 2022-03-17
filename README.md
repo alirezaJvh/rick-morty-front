@@ -98,11 +98,12 @@ The below are only an example. Feel free to follow it or to come up with your ow
 ![login screen](./logged-out.png)
 ![example of page with all cards visible](./logged-in-no-filter.png)
 ![example of page with filter activated](./logged-in-with-filter.png)
+
 ## Requirements
 
 - You must use **React**. This is the main library in our frontend currently.
 - You must use **GraphQL**. This is the main way our frontend retrieves data currently..
-- Do **NOT** use any CSS framework (Bootstrap, Tailwind etc) or any React UI Library (Material-ui, Kendo-ui etc) since those make it difficult for you to demonstrate your CSS skills.
+- You can use any CSS preprocessors like SASS, LESS etc. Do **NOT** use any CSS frameworks (Bootstrap, Tailwind etc) or any React UI Library (Material-ui, Kendo-ui etc) since those make it difficult for us to assess your CSS skills.
 
 ## How to Deliver
 
