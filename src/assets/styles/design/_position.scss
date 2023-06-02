@@ -1,0 +1,32 @@
+@mixin position-responsive($device-size, $device) {
+  @media ($device-size) {
+    .p-#{$device}-fixed {
+      position: fixed !important;
+    }
+    .p-#{$device}-relative {
+      position: relative !important;
+    }
+    .p-#{$device}-absolute {
+      position: absolute !important;
+    }
+  }
+}
+
+.p-fixed {
+  position: fixed !important;
+}
+.p-relative {
+  position: relative !important;
+}
+.p-absolute {
+  position: absolute !important;
+}
+
+// sm
+@include position-responsive(576px, 'sm');
+// md
+@include position-responsive(768px, 'md');
+// lg
+@include position-responsive(992px, 'lg');
+// xl
+@include position-responsive(1200px, 'xl');
