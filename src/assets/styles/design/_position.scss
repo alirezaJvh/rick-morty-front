@@ -1,3 +1,5 @@
+@import './../variables/_breakpoints.scss';
+
 @mixin position-responsive($device-size, $device) {
   @media ($device-size) {
     .p-#{$device}-fixed {
@@ -23,10 +25,10 @@
 }
 
 // sm
-@include position-responsive(576px, 'sm');
+@include position-responsive($sm, 'sm');
 // md
-@include position-responsive(768px, 'md');
+@include position-responsive($md, 'md');
 // lg
-@include position-responsive(992px, 'lg');
+@include position-responsive($lg, 'lg');
 // xl
-@include position-responsive(1200px, 'xl');
+@include position-responsive($xl, 'xl');

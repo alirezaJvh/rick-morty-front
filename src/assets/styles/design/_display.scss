@@ -1,3 +1,4 @@
+@import './../variables/_breakpoints.scss';
 
 .d-none {
     display: none !important;
@@ -72,12 +73,10 @@
 }
 
 // sm
-@include display-responsive(576px, 'sm');
+@include display-responsive($sm, 'sm');
 // md
-@include display-responsive(768px, 'md');
+@include display-responsive($md, 'md');
 // lg
-@include display-responsive(992px, 'lg');
+@include display-responsive($lg, 'lg');
 // xl
-@include display-responsive(1200px, 'xl');
-// xxl
-@include display-responsive(1600px, 'xxl');
+@include display-responsive($lg, 'xl');
