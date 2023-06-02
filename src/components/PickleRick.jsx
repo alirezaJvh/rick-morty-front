@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { useQuery, gql } from '@apollo/client';
-
+import React, { useEffect } from 'react';
+// import { useQuery, gql } from '@apollo/client';
+import { loginOrCreateUser } from '../services/auth';
 import './PickleRick.css';
 
 const QUERY_FOR_PICKLE_RICK = gql`
@@ -15,7 +15,6 @@ const QUERY_FOR_PICKLE_RICK = gql`
 `;
 
 const PickleRick = () => {
-  const { loading, error, data } = useQuery(QUERY_FOR_PICKLE_RICK);
 
   if (loading) return <p>Loading...</p>;
 

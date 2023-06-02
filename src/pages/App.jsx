@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Provider from '../api/Provider';
-import PickleRick from '../components/PickleRick';
-
+import Provider from '../context/Provider';
 import './App.css';
 
 function App() {
   return (
     <Provider>
-      <PickleRick />
+      <div>salam</div>
     </Provider>
   );
 }
