@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -6,8 +7,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const Provider = ({ children }) => (
-  <ApolloProvider client={client}>{children}</ApolloProvider>
-);
+// eslint-disable-next-line react/prop-types
+function Provider({ children }) {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+}
+
+Provider.prototype = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Provider;
