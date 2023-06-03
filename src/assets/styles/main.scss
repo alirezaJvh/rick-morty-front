@@ -1,2 +1,15 @@
 @import 'rest.scss';
-@import './design/index.scss'
+@import './design/index.scss';
+
+.w-100 {
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+}
+.h-100 {
+  height: 100%;
+}
+.h-50 {
+  height: 50%;
+}
