@@ -28,7 +28,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -37,6 +37,11 @@ module.exports = {
             esModule: false,
           },
         },
+      },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
       },
     ],
   },

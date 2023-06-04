@@ -1,0 +1,9 @@
+mutation LoginOrCreateUser($username: String!) {
+  loginOrCreateUser(data: { username: $username }) {
+    token
+    user {
+      id
+      username
+    }
+  }
+}

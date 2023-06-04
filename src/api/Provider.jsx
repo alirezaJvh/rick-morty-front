@@ -7,12 +7,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// eslint-disable-next-line react/prop-types
 function Provider({ children }) {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
 
-Provider.prototype = {
+Provider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
