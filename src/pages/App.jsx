@@ -1,14 +1,14 @@
 import React from 'react';
-
-import Provider from '../context/Provider';
+import Login from './Login';
+import { useAuth } from '../api/Provider';
 import './App.css';
 
 function App() {
-  return (
-    <Provider>
-      <div>salam</div>
-    </Provider>
-  );
+  const { isAuth, dispatch } = useAuth();
+  if (!isAuth) {
+    return <Login dispatch={dispatch} />;
+  }
+  return <div>you are already login</div>;
 }
 
 export default App;
