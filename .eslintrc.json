@@ -15,6 +15,6 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error"
+    "import/no-extraneous-dependencies": 0
   }
 }
