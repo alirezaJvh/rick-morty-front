@@ -4,7 +4,7 @@ import './style.scss';
 
 function TextField({ value, placeholder, onChange }) {
   return (
-    <div className="wrapper">
+    <div className="input-wrapper">
       <input
         className="w-100"
         value={value}

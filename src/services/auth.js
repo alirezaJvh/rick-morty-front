@@ -12,10 +12,9 @@ const MUTATION_LOGIN_OR_CREATE_USER = gql`
 `;
 
 const loginOrCreateUser = () => {
-  console.log('call query');
   return useMutation(MUTATION_LOGIN_OR_CREATE_USER, {
     enabled: false,
   });
 };
 
-export { loginOrCreateUser };
+export default loginOrCreateUser;

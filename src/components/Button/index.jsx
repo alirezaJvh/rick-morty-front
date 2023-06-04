@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.scss';
 
-function Button({ children, onClick }) {
+function Button({ children, loading, onClick }) {
   return (
     <button type="button" className={['btn-wrapper']} onClick={onClick}>
-      {children}
+      {loading ? 'Loading...' : children}
     </button>
   );
 }
@@ -13,6 +13,11 @@ function Button({ children, onClick }) {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  loading: false,
 };
 
 export default Button;
