@@ -1,75 +1,90 @@
 @import './../variables/_breakpoints.scss';
 
 .d-none {
-    display: none !important;
+  display: none !important;
 }
 
 .d-inline {
-    display: inline !important;
+  display: inline !important;
 }
 
 .d-inline-block {
-    display: inline-block !important;
+  display: inline-block !important;
 }
 
 .d-block {
-    display: block !important;
+  display: block !important;
 }
 
 .d-table {
-    display: table !important;
+  display: table !important;
 }
 
 .d-table-row {
-    display: table-row !important;
+  display: table-row !important;
 }
 
 .d-table-cell {
-    display: table-cell !important;
+  display: table-cell !important;
 }
 
 .d-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .d-inline-flex {
-    display: -ms-inline-flexbox !important;
-    display: inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+}
+
+.justify-center {
+  justify-content: center;
+}
+.items-center {
+  align-items: center;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
 }
 
 @mixin display-responsive($device-size, $device) {
-    @media (min-width: $device-size) {
-        .d-#{$device}-none {
-            display: none !important;
-        }
-        .d-#{$device}-inline {
-            display: inline !important;
-        }
-        .d-#{$device}-inline-block {
-            display: inline-block !important;
-        }
-        .d-#{$device}-block {
-            display: block !important;
-        }
-        .d-#{$device}-table {
-            display: table !important;
-        }
-        .d-#{$device}-table-row {
-            display: table-row !important;
-        }
-        .d-#{$device}-table-cell {
-            display: table-cell !important;
-        }
-        .d-#{$device}-flex {
-            display: -ms-flexbox !important;
-            display: flex !important;
-        }
-        .d-#{$device}-inline-flex {
-            display: -ms-inline-flexbox !important;
-            display: inline-flex !important;
-        }
+  @media (min-width: $device-size) {
+    .d-#{$device}-none {
+      display: none !important;
     }
+    .d-#{$device}-inline {
+      display: inline !important;
+    }
+    .d-#{$device}-inline-block {
+      display: inline-block !important;
+    }
+    .d-#{$device}-block {
+      display: block !important;
+    }
+    .d-#{$device}-table {
+      display: table !important;
+    }
+    .d-#{$device}-table-row {
+      display: table-row !important;
+    }
+    .d-#{$device}-table-cell {
+      display: table-cell !important;
+    }
+    .d-#{$device}-flex {
+      display: -ms-flexbox !important;
+      display: flex !important;
+    }
+    .d-#{$device}-inline-flex {
+      display: -ms-inline-flexbox !important;
+      display: inline-flex !important;
+    }
+  }
 }
 
 // sm
