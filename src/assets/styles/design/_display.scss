@@ -58,6 +58,10 @@
   flex-direction: column;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 @mixin display-responsive($device-size, $device) {
   @media (min-width: $device-size) {
     .d-#{$device}-none {
