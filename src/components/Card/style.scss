@@ -1,6 +1,6 @@
 .card {
   background: linear-gradient(
-    to top,
+    to bottom,
     rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0.05)
   );
@@ -10,7 +10,7 @@
   z-index: 1;
 
   backdrop-filter: blur(4px);
-  padding: 8px 12px 16px;
+  padding: 8px 12px 0;
   border-radius: 8px;
   .card-image {
     width: 270px;
@@ -29,8 +29,16 @@
   }
   .info {
     font-size: 18px;
-    padding: 16px 0 8px;
+    padding: 16px 0 16px;
+    color: #fff;
   }
+}
+
+.more-info {
+  position: absolute;
+  background: #fff;
+  bottom: 0;
+  animation: open 0.4s forwards;
 }
 
 .pt-1 {
@@ -39,6 +47,33 @@
 .pt-2 {
   padding-top: 12px;
 }
-// .px-1 {
-//   padding: 0 8px;
-// }
+
+.subject {
+  padding: 8px 4px 8px 16px;
+}
+
+.value {
+  padding: 8px 16px 8px 4px;
+}
+
+.episode {
+  padding: 8px 0 8px 32px;
+  .date {
+    font-size: 13px;
+    padding: 4px 0;
+  }
+}
+
+@keyframes open {
+  from {
+    height: 0;
+    background: rgba(255, 255, 255, 0);
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.6);
+  }
+  to {
+    height: 100%;
+    border-radius: 8px;
+  }
+}

@@ -4,7 +4,7 @@ import './style.scss';
 
 function Button({ children, loading, onClick }) {
   return (
-    <button type="button" className={['btn-wrapper']} onClick={onClick}>
+    <button className="btn-wrapper w-100" type="button" onClick={onClick}>
       {loading ? 'Loading...' : children}
     </button>
   );
