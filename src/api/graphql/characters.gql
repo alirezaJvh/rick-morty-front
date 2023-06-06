@@ -16,6 +16,11 @@ query Characters($page: Int) {
         name
         dimension
       }
+      episode {
+        id
+        name
+        air_date
+      }
     }
   }
 }
