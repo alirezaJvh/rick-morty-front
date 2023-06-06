@@ -4,6 +4,7 @@ import Button from '../Button';
 import './style.scss';
 
 function Card({
+  isOpen,
   id,
   image,
   name,
@@ -15,10 +16,21 @@ function Card({
   episodes,
   openCardHandler,
 }) {
-  const [open, setOpen] = useState(false);
   const onClick = () => {
-    setOpen(true);
     openCardHandler(id);
+  };
+  // eslint-disable-next-line no-shadow
+  const creatEpisodElement = (episode) => (
+    <div key={episode.id} className="episode">
+      <div>{episode.name}</div>
+      <div className="date">{episode.air_date}</div>
+    </div>
+  );
+
+  const lastestEpisodes = () => {
+    const sorted = [...episodes].reverse();
+    const latest = sorted.slice(0, 3);
+    return latest.map((episode) => creatEpisodElement(episode));
   };
   return (
     <div className="card">
@@ -51,11 +63,9 @@ function Card({
           </div>
         </div>
         <div className="d-flex justify-center more-btn w-100">
-          <Button className="" onClick={onClick}>
-            more
-          </Button>
+          <Button onClick={onClick}>more</Button>
         </div>
-        {open && (
+        {isOpen && (
           <div className="more-info w-100">
             <Button>Less</Button>
             <div className="pt-2">
@@ -80,12 +90,7 @@ function Card({
                 <div className="value">{status}</div>
               </div>
               <div className="subject">Latest episodes:</div>
-              {episodes.slice(0, 3).map((episode) => (
-                <div key={episode.id} className="episode">
-                  <div>{episode.name}</div>
-                  <div className="date">{episode.air_date}</div>
-                </div>
-              ))}
+              {lastestEpisodes()}
             </div>
           </div>
         )}
@@ -95,6 +100,7 @@ function Card({
 }
 
 Card.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
