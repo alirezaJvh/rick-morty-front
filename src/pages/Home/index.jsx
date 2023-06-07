@@ -24,6 +24,10 @@ function Home() {
     return character;
   };
 
+  const onCloseHandler = () => {
+    setSelectedCard(undefined);
+  };
+
   return (
     <div className="home-wrapper">
       <div className="container d-flex wrap justify-between">
@@ -42,6 +46,7 @@ function Home() {
               episodes={character.episode}
               dimension={character.origin.dimension}
               openCardHandler={openCardHandler}
+              onCloseHandler={onCloseHandler}
             />
           ))}
       </div>

@@ -12,13 +12,13 @@
   backdrop-filter: blur(4px);
   padding: 8px 12px 0;
   border-radius: 8px;
-  .card-image {
+  &-image {
     width: 270px;
     height: 270px;
     border-radius: 50%;
     background-size: cover !important;
   }
-  .name {
+  &-name {
     padding: 12px;
     position: absolute;
     top: 240px;
@@ -26,6 +26,13 @@
     border-radius: 5px;
     font-size: 20px;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+  &-icon {
+    top: 15px;
+    left: 45px;
+    position: absolute;
+    cursor: pointer;
+    transition: fill 0.5s;
   }
   .info {
     font-size: 18px;
@@ -40,7 +47,6 @@
   bottom: 0;
   animation: open 0.4s forwards;
 }
-
 .pt-1 {
   padding-top: 8px;
 }

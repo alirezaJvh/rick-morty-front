@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import Icon from '../Icon';
 import './style.scss';
 
 function Card({
@@ -14,12 +15,10 @@ function Card({
   origin,
   dimension,
   episodes,
+  onCloseHandler,
   openCardHandler,
 }) {
-  const onClick = () => {
-    openCardHandler(id);
-  };
-  // eslint-disable-next-line no-shadow
+  const [favourite, seFavourite] = useState(false);
   const creatEpisodElement = (episode) => (
     <div key={episode.id} className="episode">
       <div>{episode.name}</div>
@@ -32,6 +31,16 @@ function Card({
     const latest = sorted.slice(0, 3);
     return latest.map((episode) => creatEpisodElement(episode));
   };
+
+  const toggleFavorite = () => {
+    console.log('here');
+    if (favourite) {
+      seFavourite(false);
+    } else {
+      seFavourite(true);
+    }
+  };
+
   return (
     <div className="card">
       <div className="d-flex column items-center">
@@ -39,7 +48,10 @@ function Card({
           className="card-image"
           style={{ background: `url(${image}) no-repeat center` }}
         />
-        <div className="name d-flex justify-center">{name}</div>
+        <div className="card-name d-flex justify-center">{name}</div>
+        <div onClick={toggleFavorite} className="card-icon">
+          <Icon fill={favourite ? 'yellow' : '#555555'} name="star" />
+        </div>
         <div className="info w-100 pt-2">
           <div className="d-flex justify-between">
             <div>Species:</div>
@@ -63,11 +75,11 @@ function Card({
           </div>
         </div>
         <div className="d-flex justify-center more-btn w-100">
-          <Button onClick={onClick}>more</Button>
+          <Button onClick={() => openCardHandler(id)}>more</Button>
         </div>
         {isOpen && (
           <div className="more-info w-100">
-            <Button>Less</Button>
+            <Button onClick={onCloseHandler}>Less</Button>
             <div className="pt-2">
               <div className="d-flex justify-between w-100">
                 <div className="subject">Species:</div>
@@ -112,6 +124,7 @@ Card.propTypes = {
     PropTypes.shape({ name: PropTypes.string, air_date: PropTypes.string }),
   ).isRequired,
   openCardHandler: PropTypes.func.isRequired,
+  onCloseHandler: PropTypes.func.isRequired,
   dimension: PropTypes.string,
 };
 
