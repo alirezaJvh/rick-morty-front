@@ -28,6 +28,15 @@ const saveToken = (state, { payload }) => {
   };
 };
 
+const updateUser = (state, { payload }) => {
+  const { user } = payload;
+  localStorage.setItem('user', JSON.stringify(user));
+  return {
+    ...state,
+    user,
+  };
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN': {
@@ -36,6 +45,10 @@ const reducer = (state, action) => {
     }
     case 'LOGOUT': {
       const obj = clearToken();
+      return obj;
+    }
+    case 'UPDATE_USER': {
+      const obj = updateUser(state, action);
       return obj;
     }
     default:

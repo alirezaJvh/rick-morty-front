@@ -1,22 +1,31 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { Characters } from '../../api/graphql/characters.gql';
+import { AddFavourite } from '../../api/graphql/favourite.gql';
 import Card from '../../components/Card';
 import './style.scss';
 
-function Home({ user }) {
+function Home({ user, dispatch }) {
   const [openCard, setOpenCard] = useState(false);
   const [favouritesId, setFavouritesId] = useState({});
   const [selectedCard, setSelectedCard] = useState(undefined);
-  const { loading, error, data } = useQuery(Characters, {
+
+  const { loading, data } = useQuery(Characters, {
     variables: { page: 1 },
     onCompleted() {
       user.favourites.forEach(({ id }) => {
         setFavouritesId((prevState) => ({ ...prevState, [id]: true }));
       });
-      console.log(data);
-      console.log(user);
+    },
+  });
+
+  const [addFavourite] = useMutation(AddFavourite, {
+    onCompleted(res) {
+      dispatch({ type: 'UPDATE_USER', payload: { user: res.addFavourite } });
+      res.addFavourite.favourites.forEach(({ id }) => {
+        setFavouritesId((prevState) => ({ ...prevState, [id]: true }));
+      });
     },
   });
 
@@ -31,6 +40,42 @@ function Home({ user }) {
     setSelectedCard(undefined);
   };
 
+  const prepareEpisode = (episode) => {
+    const sortedEpisode = [...episode].reverse().slice(0, 3);
+    return sortedEpisode.map(({ __typename, ...rest }) => ({ ...rest }));
+  };
+
+  const prepareSendingFavouriteData = ({
+    __typename,
+    origin,
+    episode,
+    ...rest
+  }) => {
+    const { name, dimension } = origin;
+    const sortedEpisode = prepareEpisode(episode);
+    return {
+      ...rest,
+      origin: { name, dimension },
+      episode: [...sortedEpisode],
+    };
+  };
+
+  const toggleFavourite = (id, isFavourite) => {
+    if (!isFavourite) {
+      const favouriteCharacter = data.characters.results.find(
+        (c) => c.id === id,
+      );
+      const character = prepareSendingFavouriteData(favouriteCharacter);
+      addFavourite({
+        variables: {
+          data: { ...character },
+        },
+      });
+    } else {
+      console.log(' not favourite');
+    }
+  };
+
   return (
     <div className="home-wrapper">
       <div className="container d-flex wrap justify-between">
@@ -38,8 +83,6 @@ function Home({ user }) {
           data.characters.results.map((character) => (
             <Card
               key={character.id}
-              isOpen={openCard || selectedCard === character.id}
-              isFavourite={favouritesId[character.id]}
               id={character.id}
               name={character.name}
               image={character.image}
@@ -49,6 +92,9 @@ function Home({ user }) {
               origin={character.origin.name}
               episodes={character.episode}
               dimension={character.origin.dimension}
+              isFavourite={favouritesId[character.id] ?? false}
+              isOpen={openCard || selectedCard === character.id}
+              onClickFavourite={toggleFavourite}
               openCardHandler={openCardHandler}
               onCloseHandler={onCloseHandler}
             />
@@ -61,6 +107,7 @@ function Home({ user }) {
 Home.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   user: PropTypes.shape({ favourites: PropTypes.array }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default Home;

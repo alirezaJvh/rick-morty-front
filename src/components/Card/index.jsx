@@ -18,8 +18,8 @@ function Card({
   episodes,
   onCloseHandler,
   openCardHandler,
+  onClickFavourite,
 }) {
-  const [favourite, seFavourite] = useState(false);
   const creatEpisodElement = (episode) => (
     <div key={episode.id} className="episode">
       <div>{episode.name}</div>
@@ -34,11 +34,7 @@ function Card({
   };
 
   const toggleFavorite = () => {
-    if (favourite) {
-      seFavourite(false);
-    } else {
-      seFavourite(true);
-    }
+    onClickFavourite(id, isFavourite);
   };
 
   return (
@@ -49,11 +45,13 @@ function Card({
           style={{ background: `url(${image}) no-repeat center` }}
         />
         <div className="card-name d-flex justify-center">{name}</div>
-        <div onClick={toggleFavorite} className="card-icon">
-          <Icon
-            fill={favourite || isFavourite ? 'yellow' : '#555555'}
-            name="star"
-          />
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        <div
+          onClick={toggleFavorite}
+          onKeyDown={toggleFavorite}
+          className="card-icon"
+        >
+          <Icon fill={isFavourite ? 'yellow' : '#555555'} name="star" />
         </div>
         <div className="info w-100 pt-2">
           <div className="d-flex justify-between">
@@ -116,7 +114,7 @@ function Card({
 
 Card.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  isFavourite: PropTypes.bool,
+  isFavourite: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -124,17 +122,17 @@ Card.propTypes = {
   gender: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   origin: PropTypes.string.isRequired,
-  episodes: PropTypes.arrayOf(
-    PropTypes.shape({ name: PropTypes.string, air_date: PropTypes.string }),
-  ).isRequired,
   openCardHandler: PropTypes.func.isRequired,
   onCloseHandler: PropTypes.func.isRequired,
   dimension: PropTypes.string,
+  onClickFavourite: PropTypes.func.isRequired,
+  episodes: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string, air_date: PropTypes.string }),
+  ).isRequired,
 };
 
 Card.defaultProps = {
   dimension: '',
-  isFavourite: false,
 };
 
 export default Card;

@@ -1,0 +1,23 @@
+mutation AddFavourite($data: addFavouriteInput!) {
+  addFavourite(data: $data) {
+    id
+    username
+    favourites {
+      id
+      name
+      image
+      species
+      gender
+      status
+      origin {
+        name
+        dimension
+      }
+      episode {
+        id
+        name
+        air_date
+      }
+    }
+  }
+}
