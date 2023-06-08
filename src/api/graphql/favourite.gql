@@ -21,3 +21,29 @@ mutation AddFavourite($data: addFavouriteInput!) {
     }
   }
 }
+
+mutation RemoveFavourite($data: removeFavouriteInput!) {
+  removeFavourite(data: $data) {
+    id
+    username
+    favourites {
+      id
+      name
+      image
+      species
+      gender
+      status
+      origin {
+        name
+        dimension
+      }
+      episode {
+        id
+        name
+        air_date
+      }
+    }
+  }
+}
+
+# fragment FavouriteDetail on Cha

@@ -8,13 +8,13 @@ function Header({ isAuth, user, dispatch }) {
 
   return (
     <div className={`header-wrapper p-fixed d-flex ${contentAlignment}`}>
+      {isAuth && <div className="username"> {user && user.username}</div>}
+      <div className="logo"></div>
       {isAuth && (
         <div className="d-flex column justify-center">
           <Button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</Button>
         </div>
       )}
-      <div className="logo"></div>
-      {isAuth && <div className="username"> {user && user.username}</div>}
     </div>
   );
 }

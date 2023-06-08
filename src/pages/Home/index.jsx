@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { Characters } from '../../api/graphql/characters.gql';
-import { AddFavourite } from '../../api/graphql/favourite.gql';
+import { AddFavourite, RemoveFavourite } from '../../api/graphql/favourite.gql';
 import Card from '../../components/Card';
 import './style.scss';
 
@@ -22,12 +22,15 @@ function Home({ user, dispatch }) {
 
   const [addFavourite] = useMutation(AddFavourite, {
     onCompleted(res) {
+      console.log('here');
       dispatch({ type: 'UPDATE_USER', payload: { user: res.addFavourite } });
       res.addFavourite.favourites.forEach(({ id }) => {
         setFavouritesId((prevState) => ({ ...prevState, [id]: true }));
       });
     },
   });
+
+  const [removeFavourite] = useMutation(RemoveFavourite);
 
   const openCardHandler = (id) => {
     const character = data.characters.results.find((c) => c.id === id);
@@ -60,19 +63,28 @@ function Home({ user, dispatch }) {
     };
   };
 
-  const toggleFavourite = (id, isFavourite) => {
+  const toggleFavourite = async (id, isFavourite) => {
+    const favouriteCharacter = data.characters.results.find((c) => c.id === id);
+    const character = prepareSendingFavouriteData(favouriteCharacter);
     if (!isFavourite) {
-      const favouriteCharacter = data.characters.results.find(
-        (c) => c.id === id,
-      );
-      const character = prepareSendingFavouriteData(favouriteCharacter);
       addFavourite({
-        variables: {
-          data: { ...character },
-        },
+        variables: { data: { ...character } },
       });
     } else {
-      console.log(' not favourite');
+      const { data } = await removeFavourite({
+        variables: { data: { id } },
+      });
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: { user: data.removeFavourite },
+      });
+      const updatedFavouritesId = data.removeFavourite.favourites.reduce(
+        (accum, obj) => ({ ...accum, [obj.id]: true }),
+        { [data.removeFavourite.favourites[0].id]: true },
+      );
+      setFavouritesId(updatedFavouritesId);
+      console.log(updatedFavouritesId);
+      console.log('updated favorites');
     }
   };
 
