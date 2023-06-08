@@ -83,8 +83,6 @@ function Home({ user, dispatch }) {
         { [data.removeFavourite.favourites[0].id]: true },
       );
       setFavouritesId(updatedFavouritesId);
-      console.log(updatedFavouritesId);
-      console.log('updated favorites');
     }
   };
 
