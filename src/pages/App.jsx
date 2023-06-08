@@ -10,7 +10,7 @@ function App() {
 
   const loginPage = <Login dispatch={dispatch} />;
 
-  const homePage = <Home />;
+  const homePage = <Home user={user} />;
 
   return (
     <div className="w-100 app-container">

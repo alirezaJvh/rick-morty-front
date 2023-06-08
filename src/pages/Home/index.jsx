@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import PropTypes from 'prop-types';
 import { Characters } from '../../api/graphql/characters.gql';
 import Card from '../../components/Card';
 import './style.scss';
 
-function Home() {
+function Home({ user }) {
   const [openCard, setOpenCard] = useState(false);
-
+  const [favouritesId, setFavouritesId] = useState({});
   const [selectedCard, setSelectedCard] = useState(undefined);
-
   const { loading, error, data } = useQuery(Characters, {
     variables: { page: 1 },
     onCompleted() {
+      user.favourites.forEach(({ id }) => {
+        setFavouritesId((prevState) => ({ ...prevState, [id]: true }));
+      });
       console.log(data);
+      console.log(user);
     },
   });
 
   const openCardHandler = (id) => {
     const character = data.characters.results.find((c) => c.id === id);
-    console.log(character);
     setOpenCard(false);
     setSelectedCard(character.id);
     return character;
@@ -36,6 +39,7 @@ function Home() {
             <Card
               key={character.id}
               isOpen={openCard || selectedCard === character.id}
+              isFavourite={favouritesId[character.id]}
               id={character.id}
               name={character.name}
               image={character.image}
@@ -53,5 +57,10 @@ function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  user: PropTypes.shape({ favourites: PropTypes.array }).isRequired,
+};
 
 export default Home;

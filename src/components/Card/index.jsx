@@ -6,6 +6,7 @@ import './style.scss';
 
 function Card({
   isOpen,
+  isFavourite,
   id,
   image,
   name,
@@ -33,7 +34,6 @@ function Card({
   };
 
   const toggleFavorite = () => {
-    console.log('here');
     if (favourite) {
       seFavourite(false);
     } else {
@@ -50,7 +50,10 @@ function Card({
         />
         <div className="card-name d-flex justify-center">{name}</div>
         <div onClick={toggleFavorite} className="card-icon">
-          <Icon fill={favourite ? 'yellow' : '#555555'} name="star" />
+          <Icon
+            fill={favourite || isFavourite ? 'yellow' : '#555555'}
+            name="star"
+          />
         </div>
         <div className="info w-100 pt-2">
           <div className="d-flex justify-between">
@@ -113,6 +116,7 @@ function Card({
 
 Card.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  isFavourite: PropTypes.bool,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -130,6 +134,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   dimension: '',
+  isFavourite: false,
 };
 
 export default Card;
