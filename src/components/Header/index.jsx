@@ -12,7 +12,9 @@ function Header({ isAuth, user, dispatch }) {
       <div className="logo"></div>
       {isAuth && (
         <div className="d-flex column justify-center">
-          <Button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</Button>
+          <Button size="small" onClick={() => dispatch({ type: 'LOGOUT' })}>
+            Logout
+          </Button>
         </div>
       )}
     </div>

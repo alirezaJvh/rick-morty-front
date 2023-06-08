@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import { Characters } from '../../api/graphql/characters.gql';
 import { AddFavourite, RemoveFavourite } from '../../api/graphql/favourite.gql';
 import Card from '../../components/Card';
+import Button from '../../components/Button';
 import './style.scss';
 
 function Home({ user, dispatch }) {
   const [openCard, setOpenCard] = useState(false);
+  const [filter, setFilter] = useState('Display Favourite');
+  const [isShowAll, setIsShowAll] = useState(true);
   const [favouritesId, setFavouritesId] = useState({});
   const [selectedCard, setSelectedCard] = useState(undefined);
 
@@ -22,7 +25,6 @@ function Home({ user, dispatch }) {
 
   const [addFavourite] = useMutation(AddFavourite, {
     onCompleted(res) {
-      console.log('here');
       dispatch({ type: 'UPDATE_USER', payload: { user: res.addFavourite } });
       res.addFavourite.favourites.forEach(({ id }) => {
         setFavouritesId((prevState) => ({ ...prevState, [id]: true }));
@@ -63,6 +65,17 @@ function Home({ user, dispatch }) {
     };
   };
 
+  const toggleFilter = () => {
+    isShowAll;
+    if (isShowAll) {
+      setFilter('Display All');
+      setIsShowAll(false);
+    } else {
+      setFilter('Display Favourite');
+      setIsShowAll(true);
+    }
+  };
+
   const toggleFavourite = async (id, isFavourite) => {
     const favouriteCharacter = data.characters.results.find((c) => c.id === id);
     const character = prepareSendingFavouriteData(favouriteCharacter);
@@ -86,11 +99,18 @@ function Home({ user, dispatch }) {
     }
   };
 
+  const showCards = () => {
+    return isShowAll ? data.characters.results : user.favourites;
+  };
+
   return (
     <div className="home-wrapper">
+      <div className="d-flex favourite-btn-container">
+        <Button onClick={toggleFilter}>{filter}</Button>
+      </div>
       <div className="container d-flex wrap justify-between">
         {!loading &&
-          data.characters.results.map((character) => (
+          showCards().map((character) => (
             <Card
               key={character.id}
               id={character.id}
