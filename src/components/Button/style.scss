@@ -1,9 +1,15 @@
 .btn-wrapper {
   border-radius: 4px;
-  padding: 10px 12px;
   background: rgb(92 167 61);
-  font-size: 18px;
   color: #fff;
   cursor: pointer;
   border: none;
+  &-medium {
+    font-size: 18px;
+    padding: 10px 12px;
+  }
+  &-small {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
 }
