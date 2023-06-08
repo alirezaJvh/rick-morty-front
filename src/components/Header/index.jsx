@@ -7,7 +7,7 @@ function Header({ isAuth, user, dispatch }) {
   const contentAlignment = isAuth ? 'justify-between' : ' justify-center';
 
   return (
-    <div className={`header-wrapper p-fixed d-flex ${contentAlignment}`}>
+    <div className={`header-wrapper d-flex ${contentAlignment}`}>
       {isAuth && <div className="username"> {user && user.username}</div>}
       <div className="logo"></div>
       {isAuth && (

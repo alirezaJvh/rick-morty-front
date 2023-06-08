@@ -108,7 +108,7 @@ function Home({ user, dispatch }) {
       <div className="d-flex favourite-btn-container">
         <Button onClick={toggleFilter}>{filter}</Button>
       </div>
-      <div className="container d-flex wrap justify-between">
+      <div className="container d-flex wrap">
         {!loading &&
           showCards().map((character) => (
             <Card

@@ -20,7 +20,7 @@ function Login({ dispatch }) {
   };
 
   return (
-    <div className="h-100 d-flex column justify-center items-center">
+    <div className="login-container h-100 d-flex column justify-center items-center">
       <div className="login-input p-relative">
         <TextField
           value={username}

@@ -1,14 +1,13 @@
 .home-wrapper {
-  padding: 84px 64px 0;
+  padding: 0 64px;
+  height: 100%;
 
   .container {
     background: none;
-    // backdrop-filter: blur(6px);
-    // background: rgba(255, 255, 255, 0.1);
-    max-height: 85vh;
-    overflow-y: scroll;
-    row-gap: 48px;
+    min-height: 85vh;
+    gap: 35px;
   }
+
   .favourite-btn-container {
     padding: 8px 0 16px 0;
   }

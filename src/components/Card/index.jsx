@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -38,8 +38,8 @@ function Card({
   };
 
   return (
-    <div className="card">
-      <div className="d-flex column items-center">
+    <div className="card d-flex column justify-between">
+      <div className="card-content d-flex column items-center">
         <div
           className="card-image"
           style={{ background: `url(${image}) no-repeat center` }}
@@ -75,12 +75,11 @@ function Card({
             <div>{status}</div>
           </div>
         </div>
-        <div className="d-flex justify-center more-btn w-100">
-          <Button onClick={() => openCardHandler(id)}>more</Button>
-        </div>
         {isOpen && (
           <div className="more-info w-100">
-            <Button onClick={onCloseHandler}>Less</Button>
+            <Button className="w-100" onClick={onCloseHandler}>
+              Less
+            </Button>
             <div className="pt-2">
               <div className="d-flex justify-between w-100">
                 <div className="subject">Species:</div>
@@ -107,6 +106,14 @@ function Card({
             </div>
           </div>
         )}
+      </div>
+      <div className="d-flex justify-center w-100">
+        <Button
+          className="card-button w-100"
+          onClick={() => openCardHandler(id)}
+        >
+          more
+        </Button>
       </div>
     </div>
   );
