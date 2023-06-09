@@ -13,7 +13,7 @@ function Home({ user, dispatch }) {
   const [isShowAll, setIsShowAll] = useState(true);
   const [favouritesId, setFavouritesId] = useState({});
   const [selectedCard, setSelectedCard] = useState(undefined);
-  const { loading, data } = useQuery(Characters, {
+  const { loading, data, fetchMore } = useQuery(Characters, {
     variables: { page: 1 },
     onCompleted() {
       user.favourites.forEach(({ id }) => {
@@ -74,6 +74,16 @@ function Home({ user, dispatch }) {
     }
   };
 
+  const updateUser = (data) => {
+    const user = data.removeFavourite;
+    dispatch({ type: 'UPDATE_USER', payload: { user } });
+    const updatedFavouritesId = user.favourites.reduce(
+      (accum, obj) => ({ ...accum, [obj.id]: true }),
+      { [user.favourites[0].id]: true },
+    );
+    setFavouritesId(updatedFavouritesId);
+  };
+
   const toggleFavourite = async (id, isFavourite) => {
     const favouriteCharacter = data.characters.results.find((c) => c.id === id);
     const character = prepareSendingFavouriteData(favouriteCharacter);
@@ -85,15 +95,7 @@ function Home({ user, dispatch }) {
       const { data } = await removeFavourite({
         variables: { data: { id } },
       });
-      dispatch({
-        type: 'UPDATE_USER',
-        payload: { user: data.removeFavourite },
-      });
-      const updatedFavouritesId = data.removeFavourite.favourites.reduce(
-        (accum, obj) => ({ ...accum, [obj.id]: true }),
-        { [data.removeFavourite.favourites[0].id]: true },
-      );
-      setFavouritesId(updatedFavouritesId);
+      updateUser(data);
     }
   };
 
