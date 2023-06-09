@@ -1,5 +1,9 @@
-# Rick and Morty Front
+# Rick & Morty Front
 
-yarn start
+## How to run
 
+For runing this project please do this command:
 
+`yarn `
+
+`yarn start`
