@@ -13,7 +13,7 @@ function Home({ user, dispatch }) {
   const [isShowAll, setIsShowAll] = useState(true);
   const [favouritesId, setFavouritesId] = useState({});
   const [selectedCard, setSelectedCard] = useState(undefined);
-
+  console.log('hello');
   const { loading, data } = useQuery(Characters, {
     variables: { page: 1 },
     onCompleted() {
