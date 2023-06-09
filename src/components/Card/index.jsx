@@ -37,6 +37,22 @@ function Card({
     onClickFavourite(id, isFavourite);
   };
 
+  const rowContent = () => ({ species, gender, origin, dimension, status });
+
+  const rowElement = (key, value, index) => (
+    <div key={`${id}-${index}`} className="d-flex justify-between pt-2">
+      <div>{`${key.charAt(0).toUpperCase()}${key.slice(1)}:`}</div>
+      <div>{value ?? '--'}</div>
+    </div>
+  );
+
+  const showContent = () => {
+    const content = rowContent();
+    return Object.entries(content).map(([key, value], index) =>
+      rowElement(key, value, index),
+    );
+  };
+
   return (
     <div className="card d-flex column justify-between">
       <div className="card-content d-flex column items-center">
@@ -53,56 +69,18 @@ function Card({
         >
           <Icon fill={isFavourite ? 'yellow' : '#555555'} name="star" />
         </div>
-        <div className="info w-100 pt-2">
-          <div className="d-flex justify-between">
-            <div>Species:</div>
-            <div>{species}</div>
-          </div>
-          <div className="d-flex justify-between pt-2">
-            <div>Gender:</div>
-            <div>{gender}</div>
-          </div>
-          <div className="d-flex justify-between pt-2">
-            <div>Origin:</div>
-            <div>{origin}</div>
-          </div>
-          <div className="d-flex justify-between pt-2">
-            <div>Dimension:</div>
-            <div>{dimension}</div>
-          </div>
-          <div className="d-flex justify-between pt-2">
-            <div>Status:</div>
-            <div>{status}</div>
-          </div>
-        </div>
+        <div className="info w-100">{showContent()}</div>
         {isOpen && (
           <div className="more-info w-100">
             <Button className="w-100" onClick={onCloseHandler}>
               Less
             </Button>
-            <div className="pt-2">
-              <div className="d-flex justify-between w-100">
-                <div className="subject">Species:</div>
-                <div className="value">{species}</div>
+            <div className="more-info-content">
+              <div className="pt-2">
+                {showContent()}
+                <div className="pt-2">Latest episodes:</div>
+                {lastestEpisodes()}
               </div>
-              <div className="d-flex justify-between ">
-                <div className="subject">Gender:</div>
-                <div className="value">{gender}</div>
-              </div>
-              <div className="d-flex justify-between">
-                <div className="subject">Origin:</div>
-                <div className="value">{origin}</div>
-              </div>
-              <div className="d-flex justify-between">
-                <div className="subject">Dimension:</div>
-                <div className="value">{dimension}</div>
-              </div>
-              <div className="d-flex justify-between">
-                <div className="subject">Status:</div>
-                <div className="value">{status}</div>
-              </div>
-              <div className="subject">Latest episodes:</div>
-              {lastestEpisodes()}
             </div>
           </div>
         )}
