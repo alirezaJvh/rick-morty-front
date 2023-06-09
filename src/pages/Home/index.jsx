@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { Characters } from '../../api/graphql/characters.gql';
@@ -9,10 +9,11 @@ import './style.scss';
 
 function Home({ user, dispatch }) {
   const [openCard, setOpenCard] = useState(false);
-  const [filter, setFilter] = useState('Display Favourite');
   const [isShowAll, setIsShowAll] = useState(true);
   const [favouritesId, setFavouritesId] = useState({});
+  const [filter, setFilter] = useState('Display Favourite');
   const [selectedCard, setSelectedCard] = useState(undefined);
+
   const { loading, data, fetchMore } = useQuery(Characters, {
     variables: { page: 1 },
     onCompleted() {
@@ -103,6 +104,19 @@ function Home({ user, dispatch }) {
     return isShowAll ? data.characters.results : user.favourites;
   };
 
+  const loadMore = async () => {
+    const { info } = data.characters;
+    if (info.next) {
+      const res = await fetchMore({
+        variables: {
+          page: info.next,
+        },
+      });
+      console.log(res);
+      console.log(data);
+    }
+  };
+
   return (
     <div className="home-wrapper">
       <div className="d-flex favourite-btn-container">
@@ -129,6 +143,11 @@ function Home({ user, dispatch }) {
               onCloseHandler={onCloseHandler}
             />
           ))}
+      </div>
+      <div className="load-more d-flex justify-center">
+        <Button onClick={loadMore}>
+          {loading ? 'Loading ...' : 'Loade More'}
+        </Button>
       </div>
     </div>
   );

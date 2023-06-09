@@ -82,7 +82,25 @@ const httpLink = createHttpLink({
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          characters: {
+            keyArgs: false,
+            merge(existing = {}, incoming = {}) {
+              const { info } = incoming;
+              if (existing.results) {
+                const results = [...existing.results, ...incoming.results];
+                return { results, info };
+              }
+              return { ...incoming };
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 function Provider({ children }) {
